@@ -1,11 +1,10 @@
 # Step 01 - Set up the main screen
 from turtle import Screen
-
-import cars
 from character import Character
 from cars import Car
 import random
 import time
+import cars
 
 
 scr = Screen()
@@ -14,13 +13,13 @@ scr.tracer(0)
 
 
 # Step 02 - Creating the turtle and move it
-tim = Character()
+player = Character()
 cars_list = []
 
 
 scr.listen()
-scr.onkey(tim.move_character_up, "Up")
-scr.onkey(tim.move_character_down, "Down")
+scr.onkey(player.move_character_up, "Up")
+scr.onkey(player.move_character_down, "Down")
 
 
 game_is_on = True
@@ -36,5 +35,22 @@ while game_is_on:
 
     for car in cars_list:
         car.move_car()
+
+    # remove cars when get out of the screen
+    for car in cars_list:
+        if car.xcor() < -320:
+            car.hideturtle()
+            cars_list.remove(car)
+
+
+    # collision when caracter player hit the car
+    for car in cars_list:
+        if car.distance(player) < 25:
+            game_is_on = False
+
+
+    # collision when turtle goes out of the bounds
+    if player.ycor() > 290:
+        print("Player hit the edges")
 
 scr.exitonclick()

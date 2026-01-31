@@ -4,6 +4,7 @@ import random
 
 MOVE_X = 5
 SPAWN_CHANCE = 10
+LANES = [-250, -200, -150, -100, -50, 0, 50, 100, 150, 200, 250]
 
 
 class Car(Turtle):
@@ -17,7 +18,7 @@ class Car(Turtle):
         self.shape("square")
         self.color("black")
         self.penup()
-        self.goto(x=300, y=random.randint(a=-250, b=250))
+        self.goto(x=300, y=random.choice(LANES))
 
 
     def move_car(self):
