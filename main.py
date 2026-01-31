@@ -55,5 +55,6 @@ while game_is_on:
     if player.ycor() > 290:
         score.increase_level()
         player.goto((0, -280))
+        cars.MOVE_X += 2
 
 scr.exitonclick()
