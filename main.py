@@ -2,6 +2,7 @@
 from turtle import Screen
 from character import Character
 from cars import Car
+from scorelevel import ScoreLevel
 import random
 import time
 import cars
@@ -14,6 +15,7 @@ scr.tracer(0)
 
 # Step 02 - Creating the turtle and move it
 player = Character()
+score = ScoreLevel()
 cars_list = []
 
 
@@ -43,14 +45,15 @@ while game_is_on:
             cars_list.remove(car)
 
 
-    # collision when caracter player hit the car
+    # collision when character player hit the car
     for car in cars_list:
         if car.distance(player) < 25:
             game_is_on = False
-
+            score.game_over()
 
     # collision when turtle goes out of the bounds
     if player.ycor() > 290:
-        print("Player hit the edges")
+        score.increase_level()
+        player.goto((0, -280))
 
 scr.exitonclick()
